@@ -2,7 +2,8 @@
 title: "Biodiverse GUI Cheat-Sheet"
 author: ""
 date: "May 1, 2019"
-output: html_document
+output: pdf_document
+urlcolor: blue
 ---
 
 ```{r setup, include=FALSE}
