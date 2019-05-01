@@ -1,0 +1,51 @@
+---
+title: "Biodiverse GUI Cheat-Sheet"
+author: "Michael W Belitz"
+date: "May 1, 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Spatial Data
+
+Ctrl + right click on location: Box of all species found in the location appears. This box can be copied and pasted into a text editor or spreadsheet.
+
+Selection and Export options are available in upper left box.
+
+If you right click on a location, the branches of the tree of that location turns red. If you then hover to a different location, shared branches will remain red but branches found in new location and not the previous location will be black.
+
+## Phylogenetic Data
+
+Hover the mouse over a branch in the phylogeny to see where that branch is found in the spatial data.
+
+Ctrl + right click on a branch: Box of all species in the branch appears.
+
+You’re not restricted to plotting the tree used in the analysis. Using the drop-down menu at the bottom of the window you can select from the analysis tree, the currently selected project tree, or no tree at all. In this way you’re able to explore the patterns of diversity against several alternate trees.
+
+To rescale the tree, click on trees tab on top of the GUI.
+
+
+## Results of Analyses
+
+Branches plotted in blue are found only in the index cell, those in red are found only in the cell being hovered over. The branches in black are found in both neighbour cells. Any branch not found in the two cells is in grey to reduce its visual impact without hiding it.
+
+## Helpful links
+
+[Introducing Biodiverse: Phylodiversity Made Easy](https://methodsblog.com/2016/01/22/biodiverse/)
+
+[New tree plots in Biodiverse](http://biodiverse-analysis-software.blogspot.com/2014/10/new-tree-plots-in-biodiverse.html)
+
+[Spatial Conditions](https://github.com/shawnlaffan/biodiverse/wiki/SpatialConditions)
+
+[Indices Available in Biodiverse](https://github.com/shawnlaffan/biodiverse/wiki/Indices)
+
+[Do it Yourself CANAPE](http://biodiverse-analysis-software.blogspot.com/2014/11/do-it-yourself-canape.html)
+
+[Easier to use Randomisation Resutls](http://biodiverse-analysis-software.blogspot.com/search/label/CANAPE)
+
+
+
+
