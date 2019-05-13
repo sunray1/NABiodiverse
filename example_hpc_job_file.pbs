@@ -1,0 +1,42 @@
+#!/bin/bash
+
+#  Run parts of a randomisation process across a series of array jobs.
+#  The results need to be put back together once completed.  
+
+##  Update as needed for slurm
+#PBS -l nodes=1:ppn=1,vmem=16gb
+#PBS -l walltime=15:00:00
+#PBS -t 1-9
+
+
+source ~/.bash_profile
+
+#  Ensure we are in the directory containing our basedata file
+cd "$PBS_O_WORKDIR"
+
+#  Assumes the one we want is alphabetically first.
+#  You might want to hard code the name.
+bd_base_name=`ls *.bds | grep -v results | head -1`
+
+#  Ensure the PRNG starting seed differs for each of the array jobs.
+#  Feel free to choose  adifferent method.  
+export seed=`perl -E 'print (1422678156 + $ENV{PBS_ARRAYID})'`
+echo "seed: " $seed $PBS_ARRAYID
+
+#  Unique ID for this run, allows up to 999 of them
+export BD_ID=`printf "%003d" ${PBS_ARRAYID}`
+
+#  Generate a unique results name for this array id
+export BD_NAME=`printf "results_%s" ${BD_ID}`
+export bds_file=`printf "%s.bds" ${BD_NAME}`
+echo $BD_NAME
+echo $bds_file
+
+#  Duplicate the basedata file into the results name
+[ ! -f $bds_file ] && cp $bd_base_name $bds_file
+
+#  Adjust path as needed.  Same for structured arg (e.g. CANAPE)
+#  9 array jobs, each with 111 iterations totals 999 one merged back together
+#  The definition_query arg allows us to randomise only within a region.  Delete if not needed.
+perl ~/svn/biodiverse/bin/run_randomisation.pl --bd $bds_file --rand_name structured --bd_name $BD_NAME --iterations 111 --args seed=$seed function=rand_structured definition_query='sp_point_in_poly_shape(file => "../flstate_buffered_and_shifted_sw")'
+
