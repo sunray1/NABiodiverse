@@ -1,0 +1,25 @@
+#PBS -l nodes=1:ppn=1,vmem=24GB
+#PBS -l walltime=12:00:00
+
+#  update as needed
+export PERL5LIB=$HOME/git/biodiverse/lib
+
+cd "$PBS_O_WORKDIR"
+
+
+#  Iterate over all subdirs.
+#  For each dir that contains a file called results_001.bds
+#  we collate all the results_???.bds files into one starting with merged_.
+wd=`pwd`
+for i in $(find . -name 'results_001.bds'); do
+    #echo "$i"
+    cd `dirname "$i"`
+    #pwd
+    ofile=merged_${PWD##*/}
+    #echo $ofile
+    [ -f ${ofile} ] && echo "File already exists: ${ofile}"
+    [ ! -f ${ofile}.bds ] && echo "Merging to create ${ofile}"
+    [ ! -f ${ofile}.bds ] && perl ~/git/biodiverse/etc/bin/reintegrate_basedatas_post_rand.pl --glob 'results*.bds' --opfx $ofile
+    cd $wd
+done
+

@@ -38,5 +38,5 @@ echo $bds_file
 #  Adjust path as needed.  Same for structured arg (e.g. CANAPE)
 #  9 array jobs, each with 111 iterations totals 999 one merged back together
 #  The definition_query arg allows us to randomise only within a region.  Delete if not needed.
-perl ~/svn/biodiverse/bin/run_randomisation.pl --bd $bds_file --rand_name structured --bd_name $BD_NAME --iterations 111 --args seed=$seed function=rand_structured definition_query='sp_point_in_poly_shape(file => "../flstate_buffered_and_shifted_sw")'
+perl ${HOME}/git/biodiverse/bin/run_randomisation.pl --bd $bds_file --rand_name structured --bd_name $BD_NAME --iterations 111 --args seed=$seed function=rand_structured definition_query='sp_point_in_poly_shape(file => "../flstate_buffered_and_shifted_sw")'
 
