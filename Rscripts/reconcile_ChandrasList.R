@@ -7,7 +7,6 @@ m_list <- read.csv("C:/Users/Mike/Documents/UF2/na_but_pd/name_reconciliation/Bu
                    stringsAsFactors = FALSE)
 
 
-
 perfectjoin <- left_join(c_list, m_list, by = c("binomial" = "Lamas_Valid_Name"))
 perfectjoin2 <- inner_join(c_list, m_list, by = c("binomial" = "Lamas_Valid_Name"))
 
@@ -35,8 +34,6 @@ allMatchedNames <- rbind(matched2, matchedGlassberg2, matchedKaufman2)
 notmatched <- left_join(m_list, allMatchedNames, by = "Lamas_Valid_Name")
 
 notinChandrasList <- filter(notmatched, is.na(match.y))
-
-
 
 # in Chandras List but not in Mike's List
 
